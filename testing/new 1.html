@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>lab03</title>
+    </head>
+    <body>
+        <button onclick="readJSON()">go</button>
+        <div id="output"></div>
+        <script>
+            function readJSON(){
+                $.ajax({
+					
+					
+                    "url":"https://api.roadgoat.com/api/v2/destinations/rijeka-croatia",
+                    "method":"GET",
+                    "data":"",
+                    "dataType":"JSON",
+					
+					'headers': {
+						'Authorization': `'ba673fe35348681b558314fb690b18a4:53ff80aa7bddfa4370a99e6b77905636'`
+					},
+					
+                    "success":function(result){
+                        var name = result.data.attibutes.name;
+                        console.log(name);
+                        document.getElementById("output").innerText= name;
+                    },
+                    "error":function(xhr,status,error){
+                        console.log("status:"+status+" message:"+error);
+                    }
+
+                });
+            }
+        
+        </script>
+    </body>
+</html>
