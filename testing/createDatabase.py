@@ -7,7 +7,8 @@ db = mysql.connector.connect(
 )
 
 cursor = db.cursor()
-
+#sql = "create database if not exists" + self.database (to take from config)
+# self.blabla
 cursor.execute('create DATABASE IF NOT EXISTS places')
 
 db.close()

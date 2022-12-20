@@ -1,7 +1,7 @@
 import mysql.connector
 import dbconfig as cfg
 
-class placesDAO:
+class PlacesDAO:
     connection = ''
     cursor = ''
     host = ''
@@ -15,7 +15,7 @@ class placesDAO:
         self.password = cfg.mysql['password']
         self.database = cfg.mysql['database']
 
-    def getCursor(self): 
+    def getcursor(self): 
         self.connection = mysql.connector.connect(
             host = self.host,
             user = self.user,
@@ -63,6 +63,35 @@ class placesDAO:
         self.closeAll()
         return returnvalue
 
+    def update(self, values):
+        cursor = self.getcursor()
+        sql="update visited set city= %s, dov=%s, hospitality=%s, food=%s, transport=%s, attractions=%s, entertainment=%s  where id = %s"
+        cursor.execute(sql, values)
+        self.connection.commit()
+        self.closeAll()
+        
+    def delete(self, id):
+        cursor = self.getcursor()
+        sql="delete from visited where id = %s"
+        values = (id,)
+        cursor.execute(sql, values)
+        self.connection.commit()
+        self.closeAll()
+        print("Destination deleted!")
+
+    def convertToDictionary(self, result):
+        colnames=['id','city','dov', 'hospitality', 'food', 'transport', 'attractions', 'entertainment']
+        item = {}
+        
+        if result:
+            for i, colName in enumerate(colnames):
+                value = result[i]
+                item[colName] = value
+        
+        return item
+
+
+"""
     def findByCityName(self, city):
         cursor = self.getcursor()
         sql="select * from visited where id = %s"
@@ -132,34 +161,22 @@ class placesDAO:
         returnvalue = self.convertToDictionary(result)
         self.closeAll()
         return returnvalue
+"""
 
 
 
-    def update(self, values):
-        cursor = self.getcursor()
-        sql="update book set city= %s, dov=%s, hospitality=%s, food=%s, transport=%s, attractions=%s, enterteinment=%s  where id = %s"
-        cursor.execute(sql, values)
-        self.connection.commit()
-        self.closeAll()
-        
-    def delete(self, id):
-        cursor = self.getcursor()
-        sql="delete from visited where id = %s"
-        values = (id,)
-        cursor.execute(sql, values)
-        self.connection.commit()
-        self.closeAll()
-        print("Destination deleted!")
 
-    def convertToDictionary(self, result):
-        colnames=['id','city','dov', 'hospitality', 'food', 'transport', 'attractions', 'entertainment']
-        item = {}
-        
-        if result:
-            for i, colName in enumerate(colnames):
-                value = result[i]
-                item[colName] = value
-        
-        return item
-        
-placesDAO = placesDAO()
+
+
+placesDAO = PlacesDAO()
+
+# TESTING
+#data = ("Zadar", "2015-10-14", 7, 10, 6, 7, 5)
+#data1 = ("Limerick", "2021-12-17", 9, 5, 6, 6, 6)
+#placesDAO.create(data1)
+#placesDAO.delete(1)
+#updateVal = ("Zadar", "2008-05-06", 5, 6, 7 ,8 ,9, 2)
+#placesDAO.update(updateVal)
+
+# sql DATE format: YYYY-MM-DD
+# add avarage - check votes
