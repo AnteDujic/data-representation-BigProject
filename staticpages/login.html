@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--- Author: Ante Dujic -->
+
+<html>
+
+<head>
+	<title>Log in page</title>
+	
+	<style>
+	body {font-family: Arial}
+	
+	#login {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%); 
+	}
+	#h1 {
+		left: 53%;
+		top: 20%;
+		position: absolute;
+		transform: translate(-50%, -50%); 
+	}
+	#h2 {
+		left: 50%;
+		top: 30%;
+		position: absolute;
+		transform: translate(-50%, -50%); 
+	}
+	button {
+		background-color: #000000;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+	}
+	input[type=text], input[type=password] {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		box-sizing: border-box;
+	}
+
+	
+	</style>
+	
+</head>
+
+<body>
+	<div>
+		<h1 id = "h1"> 
+			<img src="https://static.vecteezy.com/system/resources/previews/001/957/002/non_2x/paper-plane-continuous-one-line-drawing-minimalism-illustration-symbol-of-creative-and-travel-vector.jpg" width="500" height="200" alt="Plane">
+		</h1>
+		
+		<h1 id = "h2">TRAVEL LOG</h1>
+		
+		<form id="login" method="POST" action='/login' align="right">
+			<input type="text" placeholder="Enter Username" id="uname" name="username" required>
+			<input type="password" placeholder="Enter Password" id="pword" name="password" required>
+			</br><button type="submit">LOGIN</button>
+		</form>
+	</div>
+</body>
+
+<script>
+
+</script>
+
+</html>

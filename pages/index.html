@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--- Author: Ante Dujic -->
+<html lang="en">
+
+<head>
+	<title>Visited Destinations</title>
+	<meta charset="UTF-8">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<style>
+
+	* { font-family: Arial; }
+	
+	#title {
+		text-align: center;
+	}
+	
+	.imageContainer{
+		text-align: center;
+	}
+	
+	.tableContainer{
+		position: absolute;
+		left: 50%;
+		top: 30%;
+		transform: translate(-50%, 0%);
+	}
+	
+	.visited-table {
+		border-collapse: collapse;
+		margin: 25px 0;
+		font-size: 0.9em;
+		min-width: 400px;
+		border-radius: 10px 10px 0 0;
+		overflow: hidden;		
+	}
+		
+	.visited-table thead tr {
+		background-color: #000000;
+		color: white;
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	.form {
+		background-color: #dddddd;
+		border-bottom: 5px solid #000000;
+	}
+	
+	.visited-table tbody tr:last-of-type{
+		border-bottom: 2px solid #000000;
+	}
+	
+	.visited-table tbody td {
+		text-align: center;
+	}
+	
+	.visited-table th,
+	.visited-table td {
+		padding: 12px 15px;
+		
+	}
+	
+	#add {
+		cursor:pointer;
+	}
+	
+	.editButton {
+		cursor:pointer;
+	}
+	
+	.deleteButton{
+		cursor:pointer;
+	}
+	
+		
+</style>
+
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#" onclick="goHome()">BACK</a>
+	</nav>
+	<div>
+		<h1 id="title">VISITED DESTINATIONS</h1>
+	<div>
+	<div class="imageContainer">
+		<img src="https://media.istockphoto.com/id/1350814572/vector/continuous-one-line-drawing-of-map-location-pointers-map-pin-or-navigation-pointer-with.jpg?s=612x612&w=0&k=20&c=CGHRjuOnA__r9xdWFxY17huXqHmmLdZbhSQXsge6oNA=" width="700px" height="250px" > 
+	<div>
+	
+	<div class="tableContainer">
+		<table class="visited-table" id="destinationTable">
+			<thead>
+				<tr>
+					<th> ID </th>
+					<th> Destination </th>
+					<th> Visited (YYYY-MM-DD)</th>
+					<th> Hospitality </th>
+					<th> Food </th>
+					<th> Transport </th>
+					<th> Attractions </th>
+					<th> Entertainment </th>
+					<th>  </th>
+					<th>  </th>				
+				</tr>
+			</thead>
+			<tbody class ="container" id="create-update">
+				<tr class="form" id="form">
+					<td> <input type="hidden" name="id" id="displayId"> </td>
+					<td> <input type="text" name="destination"> </td>
+					<td> <input type="text" name="dov" placeholder="YYYY-MM-DD"> </td>
+					<td> <input type="number" min="1" max="10" name="hospitality"> </td>
+					<td> <input type="number" min="1" max="10" name="food"> </td>
+					<td> <input type="number" min="1" max="10" name="transport"> </td>
+					<td> <input type="number" min="1" max="10" name="attractions"> </td>
+					<td> <input type="number" min="1" max="10" name="entertainment"> </td>
+					<td> <input type="button" id="add" value="CREATE" style="display:block" onclick="doCreate()"> </td>
+					<td> <input type="button" id="update" value="UPDATE" style="display:none" onclick="showAdd()"> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+	
+	// Define host address
+	host = window.location.origin
+	
+	// Go to Profile.html
+	function goHome() {
+        location.href = host + "/profile";
+    };
+	
+	// Add the destination details to the table
+	function addToTable(destination_details){
+        var tableElement = document.getElementById('destinationTable')
+        var rowElement = tableElement.insertRow(-1)
+        
+        rowElement.setAttribute('id',destination_details.id)
+        
+		// Assigning values to each row
+        var cell1 = rowElement.insertCell(0);
+        cell1.innerHTML = destination_details.id
+		
+		var cell2 = rowElement.insertCell(1);
+           cell2.innerHTML = destination_details.city
+		
+		var cell3 = rowElement.insertCell(2);
+           cell3.innerHTML = destination_details.dov
+		
+		var cell4 = rowElement.insertCell(3);
+           cell4.innerHTML = destination_details.hospitality
+		
+		var cell5 = rowElement.insertCell(4);
+           cell5.innerHTML = destination_details.food
+		
+		var cell6 = rowElement.insertCell(5);
+           cell6.innerHTML = destination_details.transport
+		
+		var cell7 = rowElement.insertCell(6);
+           cell7.innerHTML = destination_details.attractions
+		
+		var cell8 = rowElement.insertCell(7);
+           cell8.innerHTML = destination_details.entertainment
+		
+		var cell9 = rowElement.insertCell(8);
+           cell9.innerHTML = '<div class="editButton"> <i class="fa fa-pencil" aria-hidden="true" onclick="showUpdate(this)" ></i> </div>';
+		
+		var cell10 = rowElement.insertCell(9);
+            cell10.innerHTML = '<div class="deleteButton"><i class="fa fa-trash-o" aria-hidden="true" onclick="doDelete(this)"></i> </div>';
+					
+	}
+	
+	// Show the update button (hide add button)
+    function showUpdate(row){
+		var rowElement = row.parentNode.parentNode.parentNode;
+		destination = getFromRow(rowElement)
+		populateForm(destination)
+		document.getElementById('update').style.display = "block"
+		document.getElementById('add').style.display = "none"
+    }
+	
+	// Show the add button (hide update button)
+	function showAdd(){
+		document.getElementById('update').style.display = "none"
+		document.getElementById('add').style.display = "block"
+		doUpdate()
+		clearForm()
+	}
+	
+	// Take the values from the row
+	function getFromRow(rowElement){
+        var destination ={}
+		
+        destination.id = rowElement.getAttribute("id");
+		
+		destination.destination = rowElement.cells[1].firstChild.textContent
+		destination.dov = rowElement.cells[2].firstChild.textContent
+		destination.hospitality = rowElement.cells[3].firstChild.textContent
+		destination.food = rowElement.cells[4].firstChild.textContent
+		destination.transport = rowElement.cells[5].firstChild.textContent
+		destination.attractions = rowElement.cells[6].firstChild.textContent
+		destination.entertainment = rowElement.cells[7].firstChild.textContent
+		
+        return destination
+    }
+	
+	// Updating server and database (calling other functions)
+	function doUpdate(){
+        destination = getDestinationFromForm()
+        updateDestination(destination)
+		updateTableRow(destination)
+		location.reload();
+        clearForm()
+    }
+	
+	// Updating table row
+	function updateTableRow(destination){
+        rowElement = document.getElementById(destination.id)
+        rowElement.cells[1].firstChild.textContent = destination.destination
+        rowElement.cells[2].firstChild.textContent = destination.dov
+        rowElement.cells[3].firstChild.textContent = destination.hospitality
+        rowElement.cells[4].firstChild.textContent = destination.food
+        rowElement.cells[5].firstChild.textContent = destination.transport
+        rowElement.cells[6].firstChild.textContent = destination.attractions
+		rowElement.cells[7].firstChild.textContent = destination.entertainment
+    }
+	
+	// Fill the form
+	function populateForm(item){
+        var form = document.getElementById('form')
+		
+		form.querySelector('input[name="id"]').value  = item.id
+        form.querySelector('input[name="id"]').disabled = true
+
+        form.querySelector('input[name="destination"]').value = item.destination
+        form.querySelector('input[name="dov"]').value = item.dov
+        form.querySelector('input[name="hospitality"]').value = item.hospitality
+		form.querySelector('input[name="food"]').value = item.food
+		form.querySelector('input[name="transport"]').value = item.transport
+		form.querySelector('input[name="attractions"]').value = item.attractions
+		form.querySelector('input[name="entertainment"]').value = item.entertainment
+        return item
+    }
+	
+	// Clear the form
+	function clearForm(){
+		var form = document.getElementById('form')
+		
+		form.querySelector('input[name="id"]').value  = ""
+        form.querySelector('input[name="id"]').disabled = false
+
+        form.querySelector('input[name="destination"]').value = ""
+        form.querySelector('input[name="dov"]').value = ""
+        form.querySelector('input[name="hospitality"]').value = ""
+		form.querySelector('input[name="food"]').value = ""
+		form.querySelector('input[name="transport"]').value = ""
+		form.querySelector('input[name="attractions"]').value = ""
+		form.querySelector('input[name="entertainment"]').value = ""
+    }
+	
+	// Takes form inputs
+	function getDestinationFromForm(){
+		
+		var form = document.getElementById('form')
+		var destination_details = {}
+		
+		destination_details.id = form.querySelector('input[name="id"]').value
+		destination_details.city = form.querySelector('input[name="destination"]').value
+		destination_details.dov = form.querySelector('input[name="dov"]').value
+		destination_details.hospitality = form.querySelector('input[name="hospitality"]').value
+		destination_details.food = form.querySelector('input[name="food"]').value
+		destination_details.transport = form.querySelector('input[name="transport"]').value
+		destination_details.attractions = form.querySelector('input[name="attractions"]').value
+		destination_details.entertainment = form.querySelector('input[name="entertainment"]').value
+		console.log(JSON.stringify(destination_details))
+		return destination_details
+	}
+	
+	// Create new records on server and database (calling other functions) 
+	function doCreate(){	
+			destination_details = getDestinationFromForm()
+			console.log(JSON.stringify(destination_details))
+			createDestination(destination_details)
+			location.reload();
+		}
+	
+	// Delete record from server and database
+	function doDelete(r){
+        var tableElement = document.getElementById('destinationTable');
+        var rowElement = r.parentNode.parentNode.parentNode;
+        var index = rowElement.rowIndex;
+		var id = rowElement.getAttribute("id")
+        deleteDestination(id);
+        tableElement.deleteRow(index);
+    }
+	
+	// Getting records from the database
+	function getAll(){
+        $.ajax({
+            "url": "http://127.0.0.1:5000/visited",
+            "method":"GET",
+            "data":"",
+            "dataType": "JSON",
+            "success":function(result){
+                for (details of result){
+					addToTable(details)
+				}
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+    }
+	
+	// Create new data
+	function createDestination(destination){
+		$.ajax({
+            "url": "http://127.0.0.1:5000/visited",
+            "method":"POST",
+            "data":JSON.stringify(destination),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                console.log(result);
+                destination.id = result.id
+                addToTable(destination)
+				clearForm()
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+    }
+	
+	// Update existing data
+	function updateDestination(destination){
+        console.log(JSON.stringify(destination));
+        $.ajax({
+            "url": "http://127.0.0.1:5000/visited/"+encodeURI(destination.id),
+            "method":"PUT",
+            "data":JSON.stringify(destination),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+			    updateTableRow(destination)
+                clearForm()
+                  
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+	}
+	
+	// Delete existing data
+	function deleteDestination(id){
+        
+        $.ajax({
+            "url": "http://127.0.0.1:5000/visited/"+encodeURI(id),
+            "method":"DELETE",
+            "data":"",
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                  
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+    }
+	
+getAll()
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--- Author: Ante Dujic -->
+
+<html>
+
+<head>
+	<title>Home Page</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+	<style>
+	body {font-family: Arial}
+	
+	.welcome{
+		text-align: center;
+	}
+	
+	.parent {
+		padding: 100px 10px;
+		text-align: center;
+		
+	}
+	
+	.child {
+		display: inline-block;
+		border: 3px solid #ccc;
+		padding: 40px 40px;
+		vertical-align: middle;
+		cursor: pointer;
+		border-radius: 25px;
+	}
+	
+	.child:hover{
+		border: 3px solid black;
+	}
+	
+	.child:active{
+		transform: scale(0.98);
+	}
+	
+	</style>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#" onclick="logout()">LOGOUT</a>
+	</nav>
+
+
+    <h1 class="welcome">Welcome, {{g.user.username}}!</h1>
+    
+	
+	<div class='parent'>
+		<div class='child' id="visited" > 
+			<h2> VISITED DESTINATIONS </h2>
+			<img src="https://t3.ftcdn.net/jpg/02/99/44/48/360_F_299444898_Edreaxy8iLwD5MQEy1cXw0EOA4JWjA4o.jpg" width="400px" onclick="toVisited()" > 
+		</div>
+			<div class='child' id="details">
+				<h2> WORLD DESTINATIONS INFO </h2>
+				<img src="https://static.vecteezy.com/system/resources/previews/001/895/815/non_2x/earth-globe-one-line-drawing-of-world-map-illustration-minimalist-design-of-minimalism-isolated-on-white-background-vector.jpg" width="400px" onclick="toDestinationInfo()"> </div>
+	</div>
+	
+
+</body>
+<script type="text/javascript">
+    
+    // Define host address
+    host = window.location.origin
+    
+    // Go to Index.html
+    function toVisited() {
+        location.href = host + "/index";
+    };
+	
+	// Go to IndexOne.html
+	function toDestinationInfo() {
+        location.href = host + "/indexOne";
+    };
+	
+	function logout() {
+        location.href = host + "/logout";
+    };
+	
+</script>
+
+
+
+
+</html>
