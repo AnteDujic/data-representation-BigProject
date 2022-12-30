@@ -232,20 +232,20 @@
     }
 	
 	// Fill the form
-	function populateForm(item){
+	function populateForm(destination){
         var form = document.getElementById('form')
 		
-		form.querySelector('input[name="id"]').value  = item.id
+		form.querySelector('input[name="id"]').value  = destination.id
         form.querySelector('input[name="id"]').disabled = true
 
-        form.querySelector('input[name="destination"]').value = item.destination
-        form.querySelector('input[name="dov"]').value = item.dov
-        form.querySelector('input[name="hospitality"]').value = item.hospitality
-		form.querySelector('input[name="food"]').value = item.food
-		form.querySelector('input[name="transport"]').value = item.transport
-		form.querySelector('input[name="attractions"]').value = item.attractions
-		form.querySelector('input[name="entertainment"]').value = item.entertainment
-        return item
+        form.querySelector('input[name="destination"]').value = destination.destination
+        form.querySelector('input[name="dov"]').value = destination.dov
+        form.querySelector('input[name="hospitality"]').value = destination.hospitality
+		form.querySelector('input[name="food"]').value = destination.food
+		form.querySelector('input[name="transport"]').value = destination.transport
+		form.querySelector('input[name="attractions"]').value = destination.attractions
+		form.querySelector('input[name="entertainment"]').value = destination.entertainment
+        return destination
     }
 	
 	// Clear the form
