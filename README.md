@@ -66,7 +66,7 @@ indexOne.html | Page that handles third party restAPI, using AJAX
 
 File | Description
 -|-
-login.html | Page to redirect to when credentials are incorect
+login.html | Initial login page
 img folder | Contains images for html
 
 ### THIRD PARTY restAPI
