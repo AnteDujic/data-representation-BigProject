@@ -40,7 +40,7 @@ data-representation-BigProject
 
 https://developer.roadgoat.com/#introduction
 
-This api requires the credentials (access and secret key) to make requests. They can be obtained by registering to the page. Keys obtained of the free registration are limited to a 1000 requests, which is deemed sufficient for this project. Keys are included in the AJAX calls in *indexOne.html*. Having keys publicly visible is not a recommendation but considering it's free and only used for demonstration perposes it is included in the code.
+This api requires the credentials (access and secret key) to make requests. They can be obtained by registering to the page. Keys obtained of the free registration are limited to a 1000 requests, which is deemed sufficient for this project. Keys are included in the AJAX calls in *indexOne.html*. Having keys publicly visible is not a recommendation but considering it's free and only used for demonstration purposes it is included in the code.
 
 ### HOW TO RUN THE PROJECT
 ***
