@@ -1,4 +1,4 @@
-# data-representation-BigProject# MODULE: Data Representation
+# MODULE: Data Representation
 ## AUTHOR: Ante Dujic
 
 ***
