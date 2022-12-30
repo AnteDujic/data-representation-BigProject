@@ -8,66 +8,32 @@ This repository contains the work done as a project for the Data Representation 
 ```
 data-representation-BigProject
 │   .gitignore
-│   README.md
-│   dao.py 
-│   dbconfigtemplate.py 
-│   requirements.txt
-│   server.py 
+│   README.md                   // This readme
+│   dao.py                      // Program to connect server to the mySQL queries
+│   dbconfigtemplate.py         // Program for setting mySQL details - rename to dbconfig.py and fill your details when running the project
+│   requirements.txt            // Libraries used to run the app - use to install to your local machine (or VM)
+│   server.py                   // Main app to define login and Flask commands
 │
 └───createDB
-│   │   createDatabase.py
-│   │   createTable.py
+│   │   createDatabase.py       // Program to create database on your machine
+│   │   createTable.py          // Program to create table on your machine
 │   
 └───pages
-│   │   index.html
-│   │   indexOne.html
-│   │   login.html
-│   │   profile.html
+│   │   index.html              // Page that handles the created restAPI, using AJAX
+│   │   indexOne.html           // Page that handles third party restAPI, using AJAX - more on restAPI below
+│   │   login.html              // Page to redirect to when credentials are incorect
+│   │   profile.html            // Home page, entered when logged in correctly
 │   
 └───staticpages
-│   │   login.html
+│   │   login.html              // Initial login page
 │   │
-│   └───img
+│   └───img                     // Contains images for html
 │       │   destination.jpg
 │       │   hand.jpg
 │       │   paperplane.jpg
 │       │   plane.jpg
 │       │   world.jpg
 ```
-
-### FILE DETAILS
-***
-
-File | Description
--|-
-server.py | Main app to define login and Flask commands
-dao.py | Program to connect server to the mySQL queries
-dbconfigtemplate.py | Program for setting mySQL details - rename to dbconfig.py and fill your details when running the project
-requirements.txt | Libraries used to run the app - use to install to your local machine (or VM)
-README.md | This readme
-
-##### createDB
-
-File | Description
--|-
-createDatabase.py | Program to create database on your machine
-createTable.py | Program to create table on your machine
-
-##### pages
-
-File | Description
--|-
-login.html | Page to redirect to when credentials are incorect
-profile.html | Home page, entered when logged in correctly
-index.html | Page that handles the created restAPI, using AJAX
-indexOne.html | Page that handles third party restAPI, using AJAX
-
-##### staticpages
-
-File | Description
--|-
-login.html | Initial login page
-img folder | Contains images for html
 
 ### THIRD PARTY restAPI
 ***
