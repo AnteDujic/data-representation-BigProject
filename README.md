@@ -64,3 +64,7 @@ LINK: http://antedujic.pythonanywhere.com/
 6. Run *createTable.py*
 7. Run *server.py*
 8. Open your browser and run http://127.0.0.1:5000/
+
+### USER EXPERIENCE BRIEF
+***
+Upon entering the website, user is asked to enter login details. If the entered details are correct, the user is brought to the home page. From here, user can logout or go to the other 2 pages - visited destinations or world destination info. Visited destinations is the list of destinations user have visited, date they visited the destination and the ratings (e.g. for food, transport, etc.). New destinations can be added, and the existing ones can be updated or deleted. The other page, Destination Info, allows the user to input a name of a destination. The list of all the world destinations with that name will be displayed. User can then pick one of the listed destinations and see some detailed informations (e.g. cost, safety, population, etc.).
